@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "19585923256",
+    "project_id": "com-example-rocketia-96067",
+    "storage_bucket": "com-example-rocketia-96067.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19585923256:android:89fb3a9d90b8133ca31c4d",
+        "android_client_info": {
+          "package_name": "com.example.rocketia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFoXV1pNzAyD1mcv6Ur7dJVmfWUQECZxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
