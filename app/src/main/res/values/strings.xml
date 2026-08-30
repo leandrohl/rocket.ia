@@ -31,4 +31,6 @@
     <string name="react">React</string>
     <string name="node_js">Node.JS</string>
     <string name="swift">Swift</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
