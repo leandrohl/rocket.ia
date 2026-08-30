@@ -18,8 +18,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="@dimen/lg_36dp"
-            android:layout_height="@dimen/lg_36dp"
+            android:layout_width="@dimen/xxmd_36dp"
+            android:layout_height="@dimen/xxmd_36dp"
             android:src="@drawable/img_bubble_ia" />
 
         <TextView
