@@ -1,4 +1,4 @@
-package com.example.rocketia
+package com.example.rocketia.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/AIChatFragment"
-        android:name="com.example.rocketia.AIChatFragment"
+        android:name="com.example.rocketia.ui.AIChatFragment"
         android:label="fragment_a_i_chat"
         tools:layout="@layout/fragment_a_i_chat" />
     <fragment
         android:id="@+id/AIChatHistoryFragment"
-        android:name="com.example.rocketia.AIChatHistoryFragment"
+        android:name="com.example.rocketia.ui.AIChatHistoryFragment"
         android:label="fragment_ai_chat_history"
         tools:layout="@layout/fragment_ai_chat_history" />
 </navigation>
