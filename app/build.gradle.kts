@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.bundles.navigation)
     implementation(libs.material)

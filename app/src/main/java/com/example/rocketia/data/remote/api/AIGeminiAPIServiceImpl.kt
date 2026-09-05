@@ -1,32 +1,24 @@
-package com.example.rocketia.data.api
+package com.example.rocketia.data.remote.api
 
 import com.google.firebase.Firebase
 import com.google.firebase.ai.ai
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 private const val GENERATIVE_MODEL_NAME = "gemini-1.5-flash"
 
-class AIGeminiAPIServiceImpl(
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-): AIApiService {
+class AIGeminiAPIServiceImpl(): AIApiService {
     private val generativeModel = Firebase.ai.generativeModel(
         modelName = "gemini-2.5-flash"
     )
 
     override suspend fun sendPrompt(stack: String, question: String): String? =
-        withContext(ioDispatcher) {
-            try {
-                val customPrompt = generatePrompt(stack, question)
-                val response = generativeModel.generateContent(
-                    prompt = customPrompt
-                )
-
-                response.text
-            } catch (_: Exception) {
-                null
-            }
+        try {
+            val customPrompt = generatePrompt(stack, question)
+            val response = generativeModel.generateContent(
+                prompt = customPrompt
+            )
+            response.text
+        } catch (_: Exception) {
+            null
         }
 
     private fun generatePrompt(stack: String, question: String): String =

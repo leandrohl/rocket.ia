@@ -13,6 +13,7 @@ lottie = "6.6.2"
 navigation = "2.8.7"
 room = "2.6.1"
 ksp = "2.2.10-2.0.2"
+dataStore = "1.1.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +29,7 @@ navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-kt
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 
 [bundles]
 navigation = ["navigation-ui-ktx", "navigation-fragment-ktx"]

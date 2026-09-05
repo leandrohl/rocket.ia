@@ -1,0 +1,13 @@
+package com.example.rocketia.data.local.preferences
+
+import kotlinx.coroutines.flow.Flow
+
+interface UserSettingsPreferences {
+    val selectedStack: Flow<String>
+
+    suspend fun changeSelectedStack(stack: String)
+
+    val firstLaunch: Flow<Boolean>
+
+    suspend fun changeFirstLaunch()
+}
