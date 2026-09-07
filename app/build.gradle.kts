@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -41,6 +42,9 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.bundles.room)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.koin.android)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.bundles.navigation)
     implementation(libs.material)

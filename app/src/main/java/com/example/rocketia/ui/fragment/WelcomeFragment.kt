@@ -5,17 +5,64 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.rocketia.R
+import com.example.rocketia.databinding.FragmentWelcomeBinding
+import com.example.rocketia.ui.event.WelcomeUiEvent
+import com.example.rocketia.ui.viewmodel.WelcomeViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class WelcomeFragment() : Fragment() {
 
-class WelcomeFragment : Fragment() {
+    private val viewModel: WelcomeViewModel by viewModel()
+
+    private var _binding: FragmentWelcomeBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.onEvent(event = WelcomeUiEvent.CheckHasSelectedStack)
+
+        setupObservers()
+
+        with(binding) {
+            btnWelcomeStart.setOnClickListener {
+                findNavController().navigate(R.id.action_welcomeFragment_to_chooseStackFragment)
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            viewModel.uiState.collect { uiState ->
+                uiState.hasSelectedStack?.let { hasSelectedStack ->
+                    if (hasSelectedStack) {
+                        findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
+                    } else {
+                        binding.pbWelcomeLoading.visibility = View.GONE
+                        binding.llWelcomeContainer.visibility = View.VISIBLE
+                    }
+                }
+            }
+                // Handle UI state updates here
+
+        }
+    }
 }
