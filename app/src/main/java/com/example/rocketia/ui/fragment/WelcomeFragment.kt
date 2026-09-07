@@ -52,7 +52,7 @@ class WelcomeFragment() : Fragment() {
     }
 
     private fun setupObservers() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     uiState.hasSelectedStack?.let { hasSelectedStack ->

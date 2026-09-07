@@ -33,6 +33,7 @@
 
 
         <ImageButton
+            android:id="@+id/ibUserSettings"
             android:layout_width="@dimen/lg_48dp"
             android:layout_height="@dimen/xlg_54dp"
             android:backgroundTint="@color/background_elevated"
