@@ -1,4 +1,4 @@
-package com.example.rocketia.ui
+package com.example.rocketia.ui.state
 
 sealed interface UiState {
 

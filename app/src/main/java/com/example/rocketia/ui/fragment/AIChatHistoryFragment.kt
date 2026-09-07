@@ -1,4 +1,4 @@
-package com.example.rocketia.ui
+package com.example.rocketia.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
