@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.rocketia.R
 import com.example.rocketia.databinding.FragmentWelcomeBinding
@@ -51,18 +53,18 @@ class WelcomeFragment() : Fragment() {
 
     private fun setupObservers() {
         lifecycleScope.launch {
-            viewModel.uiState.collect { uiState ->
-                uiState.hasSelectedStack?.let { hasSelectedStack ->
-                    if (hasSelectedStack) {
-                        findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
-                    } else {
-                        binding.pbWelcomeLoading.visibility = View.GONE
-                        binding.llWelcomeContainer.visibility = View.VISIBLE
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    uiState.hasSelectedStack?.let { hasSelectedStack ->
+                        if (hasSelectedStack) {
+                            findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
+                        } else {
+                            binding.pbWelcomeLoading.visibility = View.GONE
+                            binding.llWelcomeContainer.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
-                // Handle UI state updates here
-
         }
     }
 }

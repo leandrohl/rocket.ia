@@ -19,6 +19,7 @@ import com.example.rocketia.domain.usecase.CheckHasSelectedStackUseCase
 import com.example.rocketia.domain.usecase.GetAIChatBySelectedStackUseCase
 import com.example.rocketia.domain.usecase.GetSelectedStackUseCase
 import com.example.rocketia.domain.usecase.SendUserQuestionUseCase
+import com.example.rocketia.ui.viewmodel.ChooseStackViewModel
 import com.example.rocketia.ui.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -46,35 +47,36 @@ val dataModule = module {
         get<RocketAIDatabase>().aiChatHistoryDao()
     }
     single<AIChatLocalDataSource> {
-        AIChatLocalDataSourceImpl( get(named("IO")), get(), get())
+        AIChatLocalDataSourceImpl( ioDispatcher = get(named("IO")), aiChatHistoryDao = get<AIChatHistoryDao>(), userSettingsPreferences = get<UserSettingsPreferences>())
     }
 
     single<AIChatRemoteDataSource> {
-        AIChatRemoteDataSourceImpl(get(named("IO")), get())
+        AIChatRemoteDataSourceImpl(ioDispatcher = get(named("IO")), aiApiService = get<AIApiService>())
     }
 
-    single<AIChatRepository> { AIChatRepositoryImpl(get(), get()) }
+    single<AIChatRepository> { AIChatRepositoryImpl(aiChatLocalDataSource = get<AIChatLocalDataSource>(), aiChatRemoteDataSource = get<AIChatRemoteDataSource>()) }
 
 }
 
 val domainModule = module {
     factory {
-        ChangeStackUseCase(get())
+        ChangeStackUseCase(repository = get<AIChatRepository>())
     }
     factory {
-        CheckHasSelectedStackUseCase(get())
+        CheckHasSelectedStackUseCase(repository = get<AIChatRepository>())
     }
     factory {
-        GetAIChatBySelectedStackUseCase(get())
+        GetAIChatBySelectedStackUseCase(repository = get<AIChatRepository>())
     }
     factory {
-        GetSelectedStackUseCase(get())
+        GetSelectedStackUseCase(repository = get<AIChatRepository>())
     }
     factory {
-        SendUserQuestionUseCase(get())
+        SendUserQuestionUseCase(repository = get<AIChatRepository>())
     }
 }
 
 val uiModule = module {
     viewModelOf(::WelcomeViewModel)
+    viewModelOf(::ChooseStackViewModel)
 }
