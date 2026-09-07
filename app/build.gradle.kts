@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
+    implementation(libs.androidx.recyclerview)
 
     implementation(libs.bundles.navigation)
     implementation(libs.material)
