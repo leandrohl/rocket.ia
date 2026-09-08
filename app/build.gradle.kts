@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.google.firebase.appcheck.debug)
     ksp(libs.room.compiler)
     implementation(libs.bundles.room)
     implementation(libs.androidx.datastore.preferences)
@@ -46,7 +47,8 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
     implementation(libs.androidx.recyclerview)
-
+    implementation(libs.markwon)
+    implementation(libs.firebase.appcheck.debug)
     implementation(libs.bundles.navigation)
     implementation(libs.material)
     implementation(libs.lottie)

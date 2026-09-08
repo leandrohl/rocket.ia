@@ -14,8 +14,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.example.rocketia.R
 import com.example.rocketia.databinding.FragmentAIChatBinding
+import com.example.rocketia.ui.adapter.AiChatAdapter
 import com.example.rocketia.ui.event.AIChatEvent
+import com.example.rocketia.ui.extension.gone
+import com.example.rocketia.ui.extension.hideKeyboard
+import com.example.rocketia.ui.extension.visible
 import com.example.rocketia.ui.viewmodel.AIChatViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.getValue
@@ -46,8 +51,15 @@ class AIChatFragment : Fragment() {
         setupObservers()
 
         with(binding) {
+            clAIChatContainer.setOnClickListener {
+                clearQuestionInputField()
+            }
             val userSettingsPopMenu = PopupMenu(requireContext(), ibUserSettings)
             userSettingsPopMenu.setupUserSettingsPopMenu()
+
+
+            binding.rvStudyAIChat.adapter = AiChatAdapter()
+
             ibUserSettings.setOnClickListener {
                 userSettingsPopMenu.show()
             }
@@ -61,7 +73,10 @@ class AIChatFragment : Fragment() {
             btnSendAIQuestion.setOnClickListener {
                 val questionText = tietAIQuestion.text.toString()
                 if (questionText.isNotEmpty()) {
+                    showLoadedAIChat()
                     viewModel.onEvent(event = AIChatEvent.SendUserQuestionToAI(questionText))
+
+                    clearQuestionInputField()
                 } else {
                     tietAIQuestion.error = "Campo obrigatório"
                 }
@@ -83,11 +98,24 @@ class AIChatFragment : Fragment() {
 
                 launch {
                     viewModel.aiChatBySelectedStack.collect { aiChatBySelectedStack ->
-                        Toast.makeText(requireContext(), "${aiChatBySelectedStack.size}", Toast.LENGTH_SHORT).show()
+                        val aiChatAdapter = binding.rvStudyAIChat.adapter as? AiChatAdapter
+                        aiChatAdapter?.apply {
+                            submitList(aiChatBySelectedStack)
+
+                            binding.rvStudyAIChat.smoothScrollToPosition(0)
+                            delay(200)
+                            binding.showLoadedAIChat()
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun FragmentAIChatBinding.clearQuestionInputField() {
+        tietAIQuestion.text?.clear()
+        tietAIQuestion.text = null
+        this.root.hideKeyboard()
     }
 
     private fun PopupMenu.setupUserSettingsPopMenu() {
@@ -103,5 +131,17 @@ class AIChatFragment : Fragment() {
             }
         }
 
+    }
+
+
+    private fun FragmentAIChatBinding.showLoadingAIChat(){
+        pbAIChatLoading.visible()
+        rvStudyAIChat.gone()
+    }
+
+
+    private fun FragmentAIChatBinding.showLoadedAIChat(){
+        pbAIChatLoading.gone()
+        rvStudyAIChat.visible()
     }
 }

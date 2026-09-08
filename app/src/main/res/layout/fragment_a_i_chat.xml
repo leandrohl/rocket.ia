@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clAIChatContainer"
     android:padding="@dimen/md_16dp"
     tools:context=".ui.fragment.AIChatFragment">
 
@@ -54,6 +55,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llAppName" />
 
+    <ProgressBar
+        android:id="@+id/pbAIChatLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminateTint="@color/brand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStudyAIChat"
         android:layout_width="match_parent"
@@ -79,8 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|start"
+            android:inputType="textCapSentences"
             android:hint="@string/qual_a_sua_duvida_sobre"
-            android:lines="3"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -26,7 +26,7 @@ class AIChatRepositoryImpl(
     override suspend fun sendUserQuestion(question: String) {
 
         val currentSelectedStack =  selectedStack.firstOrNull().orEmpty()
-        val answer = aiChatRemoteDataSource.sendPrompt(question, currentSelectedStack)
+        val answer = aiChatRemoteDataSource.sendPrompt(currentSelectedStack, question)
 
         answer?.let {
             aiChatLocalDataSource.insertAIChatConversation(

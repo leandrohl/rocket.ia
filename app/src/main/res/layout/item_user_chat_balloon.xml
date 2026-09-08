@@ -7,6 +7,7 @@
     android:background="@drawable/bg_user_chat_balloon"
     android:padding="@dimen/md_16dp"
     android:textColor="@color/text_body"
+    android:layout_marginVertical="@dimen/sm_8dp"
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="@string/o_que_e_a_classe_context"
     />

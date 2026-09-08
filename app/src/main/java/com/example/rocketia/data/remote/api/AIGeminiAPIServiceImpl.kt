@@ -1,13 +1,15 @@
 package com.example.rocketia.data.remote.api
 
+import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.ai.ai
 
 private const val GENERATIVE_MODEL_NAME = "gemini-1.5-flash"
+private const val TAG = "AIGeminiAPIService"
 
 class AIGeminiAPIServiceImpl(): AIApiService {
     private val generativeModel = Firebase.ai.generativeModel(
-        modelName = "gemini-2.5-flash"
+        modelName = "gemini-3.6-flash"
     )
 
     override suspend fun sendPrompt(stack: String, question: String): String? =
@@ -16,8 +18,10 @@ class AIGeminiAPIServiceImpl(): AIApiService {
             val response = generativeModel.generateContent(
                 prompt = customPrompt
             )
+            Log.d("AIChatRemoteDataSourceImpl", "Response: ${response.text}")
             response.text
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e(TAG, "Erro ao gerar conteúdo com Firebase AI", e)
             null
         }
 
