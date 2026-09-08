@@ -12,4 +12,6 @@ interface AIChatRepository {
 
     suspend fun changeStack(stack: String)
 
+    suspend fun getAIChatByStack(stack: String): List<AIChatText>
+
 }

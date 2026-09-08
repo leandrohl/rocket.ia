@@ -12,4 +12,5 @@ interface AIChatLocalDataSource {
 
     suspend fun changeSelectedStack(stack: String)
 
+    suspend fun getAIChatByStack(stack: String): List<AiChatTextEntity>
 }

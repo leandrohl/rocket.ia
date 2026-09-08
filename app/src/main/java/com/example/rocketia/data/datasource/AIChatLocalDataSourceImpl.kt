@@ -20,7 +20,7 @@ class AIChatLocalDataSourceImpl (
     @OptIn(ExperimentalCoroutinesApi::class)
     override val aiCurrentChatBySelectedStack: Flow<List<AiChatTextEntity>>
         get() = userSettingsPreferences.selectedStack.flatMapLatest { selectedStack ->
-            aiChatHistoryDao.getAllByStack(selectedStack.orEmpty())
+            aiChatHistoryDao.getAllByStackFlow(selectedStack.orEmpty())
         }.flowOn(ioDispatcher)
 
     override suspend fun insertAIChatConversation(
@@ -40,4 +40,10 @@ class AIChatLocalDataSourceImpl (
             userSettingsPreferences.changeSelectedStack(stack)
         }
     }
+
+    override suspend fun getAIChatByStack(stack: String): List<AiChatTextEntity> =
+        withContext(ioDispatcher) {
+            aiChatHistoryDao.getAllByStack(stack)
+        }
+
 }

@@ -13,6 +13,7 @@ import com.example.rocketia.databinding.ItemUserChatBalloonBinding
 import com.example.rocketia.domain.model.AIChatText
 import io.noties.markwon.Markwon
 import android.content.ClipboardManager
+import android.widget.Toast
 
 private const val AI_ANSWER_CLIP_DATA_LABEL = "Resposta da IA copiada"
 class AiChatAdapter : ListAdapter<AIChatText, AiChatAdapter.AiChatViewHolder>(AIChatDiffCallback()) {
@@ -33,6 +34,7 @@ class AiChatAdapter : ListAdapter<AIChatText, AiChatAdapter.AiChatViewHolder>(AI
                 tvAIAnswer.setOnLongClickListener {
                     val clipData = ClipData.newPlainText(AI_ANSWER_CLIP_DATA_LABEL, answer)
                     clipboardManager.setPrimaryClip(clipData)
+                    Toast.makeText(binding.root.context, AI_ANSWER_CLIP_DATA_LABEL, Toast.LENGTH_SHORT).show()
                     true
                 }
             }

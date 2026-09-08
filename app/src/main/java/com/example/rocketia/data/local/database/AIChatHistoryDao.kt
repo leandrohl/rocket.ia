@@ -8,7 +8,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AIChatHistoryDao {
     @Query("SELECT * FROM aichattextentity WHERE stack = :stack ORDER BY datetime DESC")
-    fun getAllByStack(stack: String): Flow<List<AiChatTextEntity>>
+    fun getAllByStackFlow(stack: String): Flow<List<AiChatTextEntity>>
+
+    @Query("SELECT * FROM aichattextentity WHERE stack = :stack ORDER BY datetime DESC")
+    fun getAllByStack(stack: String):List<AiChatTextEntity>
 
     @Insert
     suspend fun insertAll(vararg aiChatText: AiChatTextEntity)

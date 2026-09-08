@@ -73,7 +73,7 @@ class AIChatFragment : Fragment() {
             btnSendAIQuestion.setOnClickListener {
                 val questionText = tietAIQuestion.text.toString()
                 if (questionText.isNotEmpty()) {
-                    showLoadedAIChat()
+                    showLoadingAIChat()
                     viewModel.onEvent(event = AIChatEvent.SendUserQuestionToAI(questionText))
 
                     clearQuestionInputField()
