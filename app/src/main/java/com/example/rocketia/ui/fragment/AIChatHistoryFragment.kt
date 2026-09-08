@@ -10,13 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketia.R
 import com.example.rocketia.databinding.FragmentAiChatHistoryBinding
-import com.example.rocketia.databinding.FragmentChooseStackBinding
 import com.example.rocketia.ui.adapter.AiChatAdapter
 import com.example.rocketia.ui.event.AIChatHistoryEvent
-import com.example.rocketia.ui.event.ChooseStackUiEvent
 import com.example.rocketia.ui.viewmodel.AIChatHistoryViewModel
 import com.google.android.material.chip.Chip
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.getValue
@@ -36,7 +33,7 @@ class AIChatHistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAiChatHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
